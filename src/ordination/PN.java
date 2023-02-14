@@ -79,4 +79,8 @@ public class PN extends Ordination {
     public String getType() {
         return null;
     }
+
+    public Laegemiddel getLaegemiddel() {
+        return super.getLaegemiddel();
+    }
 }
