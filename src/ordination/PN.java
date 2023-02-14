@@ -1,10 +1,21 @@
 package ordination;
 
-import java.time.LocalDate;
+import gui.TypeOrdination;
 
-public class PN {
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
+public class PN extends Ordination {
 
     private double antalEnheder;
+    private ArrayList<LocalDate> givetDosis = new ArrayList<>();
+    private int antalGivet = 0;
+
+    public PN(LocalDate startDate, LocalDate slutDate, TypeOrdination type, double antalEnheder) {
+        super(startDate, slutDate, type);
+        this.antalEnheder = antalEnheder;
+    }
 
     /**
      * Registrerer at der er givet en dosis paa dagen givesDen
@@ -14,19 +25,42 @@ public class PN {
      * @return
      */
     public boolean givDosis(LocalDate givesDen) {
-        // TODO
+        if (givesDen.isAfter(super.getStartDen()) && givesDen.isBefore(super.getSlutDen())) {
+            givetDosis.add(givesDen);
+            antalGivet++;
+            return true;
+        }
         return false;   
     }
 
     public double doegnDosis() {
-        // TODO
+        LocalDate foersteDag = null;
+        LocalDate sidsteDag = null;
+        for (LocalDate ld : givetDosis) {
+            if (foersteDag == null) {
+                foersteDag = ld;
+            }
+            if (ld.isBefore(foersteDag)) {
+                foersteDag = ld;
+            }
+        }
+        for (LocalDate ld : givetDosis) {
+            if (sidsteDag == null) {
+                sidsteDag = ld;
+            }
+            if (ld.isAfter(sidsteDag)) {
+                sidsteDag = ld;
+            }
+        }
+        if (foersteDag != null && sidsteDag != null) {
+            double dageImellem = ChronoUnit.DAYS.between(foersteDag, sidsteDag);
+            return (antalGivet*antalEnheder)/dageImellem;
+        }
         return 0.0;
     }
 
-
     public double samletDosis() {
-        // TODO
-        return 0.0;
+        return antalGivet*antalEnheder;
     }
 
     /**
@@ -34,12 +68,15 @@ public class PN {
      * @return
      */
     public int getAntalGangeGivet() {
-        // TODO
-        return-1;
+        return antalGivet;
     }
 
     public double getAntalEnheder() {
         return antalEnheder;
     }
 
+    @Override
+    public String getType() {
+        return null;
+    }
 }
