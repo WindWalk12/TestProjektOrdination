@@ -39,7 +39,15 @@ public class Patient {
 
     //TODO: Metoder (med specifikation) til at vedligeholde link til Ordination
     public void addOrdination(Ordination ordination) {
-        if (!ordination)
+        if (!ordinationArrayList.contains(ordination)) {
+            ordinationArrayList.add(ordination);
+        }
+    }
+
+    public void removeOrdination(Ordination ordination) {
+        if (ordinationArrayList.contains(ordination)) {
+            ordinationArrayList.remove(ordination);
+        }
     }
 
     @Override
@@ -47,4 +55,9 @@ public class Patient {
         return navn + "  " + cprnr;
     }
 
+    public ArrayList<Ordination> getOrdinationer() {
+        return ordinationArrayList;
+    }
 }
+
+
