@@ -13,6 +13,7 @@ public class DagligSkaev extends Ordination {
     LocalDate startDato;
     LocalDate slutDato;
     private TypeOrdination typeOrdination;
+    LocalTime
 
 
     //ved oprettelse: vælg forskellige klokkeslæt og antal (vilkårligt antal)
@@ -33,7 +34,7 @@ public class DagligSkaev extends Ordination {
 
     @Override
     public double samletDosis() {
-        long daysBetween = ChronoUnit.DAYS.between(startDato, slutDato) + 1; //er start og slut inkluderet i dette?
+        long daysBetween = ChronoUnit.DAYS.between(startDato, slutDato) + 1;
         return daysBetween * doegnDosis();
     }
 
@@ -53,5 +54,9 @@ public class DagligSkaev extends Ordination {
     @Override
     public String getType() {
         return typeOrdination.toString();
+    }
+
+    public ArrayList<Dosis> getDoser() {
+        return new ArrayList<>(doser);
     }
 }
