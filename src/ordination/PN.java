@@ -12,8 +12,8 @@ public class PN extends Ordination {
     private ArrayList<LocalDate> givetDosis = new ArrayList<>();
     private int antalGivet = 0;
 
-    public PN(LocalDate startDate, LocalDate slutDate, TypeOrdination type, double antalEnheder) {
-        super(startDate, slutDate, type);
+    public PN(LocalDate startDate, LocalDate slutDate, Patient patient, double antalEnheder) {
+        super(startDate, slutDate, patient);
         this.antalEnheder = antalEnheder;
     }
 
