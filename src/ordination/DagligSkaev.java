@@ -13,7 +13,6 @@ public class DagligSkaev extends Ordination {
     LocalDate startDato;
     LocalDate slutDato;
     private TypeOrdination typeOrdination;
-    LocalTime
 
 
     //ved oprettelse: vælg forskellige klokkeslæt og antal (vilkårligt antal)
