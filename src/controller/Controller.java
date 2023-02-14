@@ -2,6 +2,7 @@ package controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import gui.TypeOrdination;
@@ -89,7 +90,7 @@ public class Controller {
 	 * Pre: ordination og dato er ikke null
 	 */
 	public void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-		// TODO
+		ordination.givDosis(dato);
 	}
 
 	/**
@@ -99,8 +100,13 @@ public class Controller {
 	 * Pre: patient og lægemiddel er ikke null
 	 */
 	public double anbefaletDosisPrDoegn(Patient patient, Laegemiddel laegemiddel) {
-		//TODO
-		return 0;
+		if (patient.getVaegt() < 25) {
+			return laegemiddel.getEnhedPrKgPrDoegnLet() * patient.getVaegt();
+		} else if (patient.getVaegt() <= 120) {
+			return laegemiddel.getEnhedPrKgPrDoegnNormal() * patient.getVaegt();
+		} else {
+			return laegemiddel.getEnhedPrKgPrDoegnTung() * patient.getVaegt();
+		}
 	}
 
 	/**
@@ -110,8 +116,22 @@ public class Controller {
 	 */
 	public int antalOrdinationerPrVægtPrLægemiddel(double vægtStart,
 			double vægtSlut, Laegemiddel laegemiddel) {
-		// TODO
-		return 0;
+		int antal = 0;
+		ArrayList<Patient> patienterMedVaegt = new ArrayList<>();
+		for (Patient p :storage.getAllPatienter()) {
+			if (p.getVaegt() >= vægtStart && p.getVaegt() <= vægtSlut) {
+				patienterMedVaegt.add(p);
+			}
+		}
+		for (Patient p :patienterMedVaegt) {
+			for (Ordination o :p.getOrdinationer()) {
+				if (o.getLaegemiddel() == laegemiddel) {
+					antal++;
+				}
+			}
+
+		}
+		return antal;
 	}
 
 	public List<Patient> getAllPatienter() {
