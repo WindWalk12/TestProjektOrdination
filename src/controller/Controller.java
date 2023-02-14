@@ -69,8 +69,13 @@ public class Controller {
 	public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen,
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			LocalTime[] klokkeSlet, double[] antalEnheder) {
-		//DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen, )
-		return null;
+		DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen, patient, laegemiddel);
+		for (int i = 0; i < klokkeSlet.length; i++) {
+			dagligSkaev.opretDosis(klokkeSlet[i],antalEnheder[i]);
+		}
+		storage.addLaegemiddel(laegemiddel);
+		storage.addPatient(patient);
+		return dagligSkaev;
 	}
 
 	/**
