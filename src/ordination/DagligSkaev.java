@@ -17,12 +17,11 @@ public class DagligSkaev extends Ordination {
 
     //ved oprettelse: vælg forskellige klokkeslæt og antal (vilkårligt antal)
 
-    public DagligSkaev(LocalDate startDate, LocalDate slutDate, TypeOrdination type) {
-        super(startDate, slutDate, type);
+    public DagligSkaev(LocalDate startDate, LocalDate slutDate, Patient patient) {
+        super(startDate, slutDate, patient);
          doser = new ArrayList<>();
         this.startDato = startDate; //ved ikke om jeg behøver at sætte datoer her, eller om man får dem fra superklassen :-)
         this.slutDato = slutDate;
-        this.typeOrdination = type;
     }
 
 
