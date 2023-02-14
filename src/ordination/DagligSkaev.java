@@ -1,5 +1,7 @@
 package ordination;
 
+import gui.TypeOrdination;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -7,21 +9,22 @@ import java.util.ArrayList;
 public class DagligSkaev extends Ordination {
 
     ArrayList<Dosis> doser = new ArrayList<>();
+    private TypeOrdination typeOrdination;
 
-    public DagligSkaev(LocalDate startDate, LocalDate slutDate) {
-        super(startDate, slutDate);
+    public DagligSkaev(LocalDate startDate, LocalDate slutDate, TypeOrdination type) {
+        super(startDate, slutDate, type);
+        this.typeOrdination = type;
     }
 
 
     public void opretDosis(LocalTime tid, double antal) {
-        Dosis dosis = new Dosis(tid,antal);
-
-        doser.add(dosis);
+      Dosis dosis = new Dosis(tid,antal);
+      doser.add(dosis);
     }
 
     @Override
     public double samletDosis() {
-        return 0;
+        //star
     }
 
     @Override
@@ -31,6 +34,6 @@ public class DagligSkaev extends Ordination {
 
     @Override
     public String getType() {
-        return null;
+        return typeOrdination.toString();
     }
 }

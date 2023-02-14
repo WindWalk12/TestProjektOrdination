@@ -1,19 +1,22 @@
 package ordination;
 
+import gui.TypeOrdination;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public abstract class Ordination {
     private LocalDate startDen;
     private LocalDate slutDen;
+    private TypeOrdination typeOrdination;
 
     // TODO Link til Laegemiddel
     // TODO constructor (med specifikation)
 
-    public Ordination(LocalDate startDate, LocalDate slutDate) {
+    public Ordination(LocalDate startDate, LocalDate slutDate, TypeOrdination type) {
         this.startDen = startDate;
         this.slutDen = slutDate;
-
+        this.typeOrdination = type;
     }
 
     public LocalDate getStartDen() {
