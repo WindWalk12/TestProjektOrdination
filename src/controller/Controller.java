@@ -52,7 +52,10 @@ public class Controller {
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
 		// TODO
-		return null;
+		DagligFast dagligFast = new DagligFast(startDen,slutDen,patient,laegemiddel,morgenAntal,middagAntal,aftenAntal,natAntal);
+		storage.addLaegemiddel(laegemiddel);
+		storage.addPatient(patient);
+		return dagligFast;
 	}
 
 	/**
