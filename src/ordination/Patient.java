@@ -1,9 +1,13 @@
 package ordination;
 
+import java.util.ArrayList;
+
 public class Patient {
     private String cprnr;
     private String navn;
     private double vaegt;
+
+    private ArrayList<Ordination> ordinationArrayList = new ArrayList<>();
 
     // TODO: Link til Ordination
 
@@ -34,6 +38,9 @@ public class Patient {
     }
 
     //TODO: Metoder (med specifikation) til at vedligeholde link til Ordination
+    public void addOrdination(Ordination ordination) {
+        if (!ordination)
+    }
 
     @Override
     public String toString(){
