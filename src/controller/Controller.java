@@ -37,11 +37,15 @@ public class Controller {
 	 */
 	public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
 			Patient patient, Laegemiddel laegemiddel, double antal) {
-		PN pn = new PN(startDen, slutDen, patient, laegemiddel,  antal);
-		storage.addLaegemiddel(laegemiddel);
-		storage.addPatient(patient);
-		pn.setTypeOrdination(TypeOrdination.PN);
-		return pn;
+		if (checkStartFoerSlut(startDen, slutDen)) {
+			PN pn = new PN(startDen, slutDen, patient, laegemiddel,  antal);
+			storage.addLaegemiddel(laegemiddel);
+			storage.addPatient(patient);
+			pn.setTypeOrdination(TypeOrdination.PN);
+			return pn;
+		} else {
+			throw new IllegalArgumentException("Slut dato skal være efter start dato");
+		}
 	}
 
 	/**
@@ -54,12 +58,15 @@ public class Controller {
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
-		// TODO
-		DagligFast dagligFast = new DagligFast(startDen,slutDen,patient,laegemiddel,morgenAntal,middagAntal,aftenAntal,natAntal);
-		storage.addLaegemiddel(laegemiddel);
-		storage.addPatient(patient);
-		dagligFast.setTypeOrdination(TypeOrdination.FAST);
-		return dagligFast;
+		if (checkStartFoerSlut(startDen, slutDen)) {
+			DagligFast dagligFast = new DagligFast(startDen,slutDen,patient,laegemiddel,morgenAntal,middagAntal,aftenAntal,natAntal);
+			storage.addLaegemiddel(laegemiddel);
+			storage.addPatient(patient);
+			dagligFast.setTypeOrdination(TypeOrdination.FAST);
+			return dagligFast;
+		} else {
+			throw new IllegalArgumentException("Slut dato skal være efter start dato");
+		}
 	}
 
 	/**
@@ -73,14 +80,18 @@ public class Controller {
 	public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen,
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			LocalTime[] klokkeSlet, double[] antalEnheder) {
-		DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen, patient, laegemiddel);
-		for (int i = 0; i < klokkeSlet.length; i++) {
-			dagligSkaev.opretDosis(klokkeSlet[i],antalEnheder[i]);
+		if (checkStartFoerSlut(startDen, slutDen)) {
+			DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen, patient, laegemiddel);
+			for (int i = 0; i < klokkeSlet.length; i++) {
+				dagligSkaev.opretDosis(klokkeSlet[i],antalEnheder[i]);
+			}
+			storage.addLaegemiddel(laegemiddel);
+			storage.addPatient(patient);
+			dagligSkaev.setTypeOrdination(TypeOrdination.SKAEV);
+			return dagligSkaev;
+		} else {
+			throw new IllegalArgumentException("Slut dato skal være efter start dato");
 		}
-		storage.addLaegemiddel(laegemiddel);
-		storage.addPatient(patient);
-		dagligSkaev.setTypeOrdination(TypeOrdination.SKAEV);
-		return dagligSkaev;
 	}
 
 	/**
@@ -90,7 +101,11 @@ public class Controller {
 	 * Pre: ordination og dato er ikke null
 	 */
 	public void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-		ordination.givDosis(dato);
+		if (ordination.givDosis(dato)) {
+
+		} else {
+			throw new IllegalArgumentException("Datoen skal være indenfor gyldighedsperioden");
+		}
 	}
 
 	/**
@@ -129,7 +144,6 @@ public class Controller {
 					antal++;
 				}
 			}
-
 		}
 		return antal;
 	}
