@@ -33,14 +33,22 @@ public class DagligFast extends Ordination {
 
     @Override
     public double samletDosis() {
+        if ((dosisArray[0].getAntal() + dosisArray[1].getAntal() +
+                dosisArray[2].getAntal() + dosisArray[3].getAntal()) < 5) {
+            throw new RuntimeException("Samlet antal dosis må være 4 højest");
+        }
         double antalDosis = dosisArray[0].getAntal() + dosisArray[1].getAntal() +
                 dosisArray[2].getAntal() + dosisArray[3].getAntal();
-        long daysBetween = ChronoUnit.DAYS.between(getSlutDen(), getStartDen());
+        long daysBetween = ChronoUnit.DAYS.between(getSlutDen(), getStartDen()) + 1;
         return daysBetween * antalDosis;
     }
 
     @Override
     public double doegnDosis() {
+        if ((dosisArray[0].getAntal() + dosisArray[1].getAntal() +
+                dosisArray[2].getAntal() + dosisArray[3].getAntal()) < 5) {
+            throw new RuntimeException("Samlet antal dosis må være 4 højest");
+        }
         return dosisArray[0].getAntal() + dosisArray[1].getAntal() + dosisArray[2].getAntal() + dosisArray[3].getAntal();
     }
 
