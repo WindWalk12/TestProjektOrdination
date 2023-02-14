@@ -4,15 +4,24 @@ import gui.TypeOrdination;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class DagligSkaev extends Ordination {
 
-    ArrayList<Dosis> doser = new ArrayList<>();
+    ArrayList<Dosis> doser;
+    LocalDate startDato;
+    LocalDate slutDato;
     private TypeOrdination typeOrdination;
+
+
+    //ved oprettelse: vælg forskellige klokkeslæt og antal (vilkårligt antal)
 
     public DagligSkaev(LocalDate startDate, LocalDate slutDate, TypeOrdination type) {
         super(startDate, slutDate, type);
+         doser = new ArrayList<>();
+        this.startDato = startDate; //ved ikke om jeg behøver at sætte datoer herrrrrrr :-)
+        this.slutDato = slutDate;
         this.typeOrdination = type;
     }
 
@@ -24,12 +33,21 @@ public class DagligSkaev extends Ordination {
 
     @Override
     public double samletDosis() {
-        //star
+        long daysBetween = ChronoUnit.DAYS.between(startDato, slutDato);
+        return daysBetween * doegnDosis();
     }
 
+
+    //for hver dosis
+    //tag antallet og læg det til double
+    //divider med size
     @Override
     public double doegnDosis() {
-        return 0;
+        double doegnDosisGennemsnit = 0;
+        for (Dosis dosis : doser) {
+            doegnDosisGennemsnit += dosis.getAntal();
+        }
+        return doegnDosisGennemsnit / doser.size();
     }
 
     @Override
