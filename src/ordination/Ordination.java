@@ -9,6 +9,7 @@ public abstract class Ordination {
     private LocalDate startDen;
     private LocalDate slutDen;
     private TypeOrdination typeOrdination;
+    private Laegemiddel laegemiddel;
 
     // TODO Link til Laegemiddel
     // TODO constructor (med specifikation)
@@ -25,6 +26,11 @@ public abstract class Ordination {
 
     public LocalDate getSlutDen() {
         return slutDen;
+    }
+    public void setLaegemiddel(Laegemiddel lm) {
+        if (laegemiddel != lm) {
+            laegemiddel = lm;
+        }
     }
 
     /**
