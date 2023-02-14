@@ -68,6 +68,7 @@ public class Controller {
 	public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen,
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			LocalTime[] klokkeSlet, double[] antalEnheder) {
+		//DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen, )
 		return null;
 	}
 
