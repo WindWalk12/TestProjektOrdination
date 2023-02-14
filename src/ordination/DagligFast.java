@@ -11,6 +11,7 @@ public class DagligFast extends Ordination {
     //TODO
 
     private Dosis[] dosisArray = new Dosis[4];
+    private TypeOrdination typeOrdination;
 
 
     public DagligFast(LocalDate startDate, LocalDate slutDate, Patient patient, Laegemiddel laegemiddel, double morgenAntal, double middagAntal,
@@ -53,7 +54,10 @@ public class DagligFast extends Ordination {
 
     @Override
     public String getType() {
-        return null;
+        return typeOrdination.toString();
+    }
+    public void setTypeOrdination(TypeOrdination typeOrdination) {
+        this.typeOrdination = typeOrdination;
     }
 
 

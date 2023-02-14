@@ -10,6 +10,7 @@ public class PN extends Ordination {
 
     private double antalEnheder;
     private ArrayList<LocalDate> givetDosis = new ArrayList<>();
+    private TypeOrdination typeOrdination;
     private int antalGivet = 0;
 
     public PN(LocalDate startDate, LocalDate slutDate, Patient patient, Laegemiddel laegemiddel, double antalEnheder) {
@@ -77,7 +78,11 @@ public class PN extends Ordination {
 
     @Override
     public String getType() {
-        return null;
+        return typeOrdination.toString();
+    }
+
+    public void setTypeOrdination(TypeOrdination typeOrdination) {
+        this.typeOrdination = typeOrdination;
     }
 
     public Laegemiddel getLaegemiddel() {

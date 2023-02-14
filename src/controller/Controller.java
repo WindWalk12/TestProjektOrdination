@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import gui.TypeOrdination;
 import ordination.*;
 import storage.Storage;
 
@@ -38,6 +39,7 @@ public class Controller {
 		PN pn = new PN(startDen, slutDen, patient, laegemiddel,  antal);
 		storage.addLaegemiddel(laegemiddel);
 		storage.addPatient(patient);
+		pn.setTypeOrdination(TypeOrdination.PN);
 		return pn;
 	}
 
@@ -55,6 +57,7 @@ public class Controller {
 		DagligFast dagligFast = new DagligFast(startDen,slutDen,patient,laegemiddel,morgenAntal,middagAntal,aftenAntal,natAntal);
 		storage.addLaegemiddel(laegemiddel);
 		storage.addPatient(patient);
+		dagligFast.setTypeOrdination(TypeOrdination.FAST);
 		return dagligFast;
 	}
 
@@ -75,6 +78,7 @@ public class Controller {
 		}
 		storage.addLaegemiddel(laegemiddel);
 		storage.addPatient(patient);
+		dagligSkaev.setTypeOrdination(TypeOrdination.SKAEV);
 		return dagligSkaev;
 	}
 

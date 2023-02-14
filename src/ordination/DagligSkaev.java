@@ -54,6 +54,10 @@ public class DagligSkaev extends Ordination {
         return typeOrdination.toString();
     }
 
+    public void setTypeOrdination(TypeOrdination typeOrdination) {
+        this.typeOrdination = typeOrdination;
+    }
+
     public ArrayList<Dosis> getDoser() {
         return new ArrayList<>(doser);
     }
