@@ -5,7 +5,6 @@ import gui.TypeOrdination;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 
 public class DagligFast extends Ordination {
     //TODO
