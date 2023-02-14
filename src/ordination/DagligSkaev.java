@@ -20,7 +20,7 @@ public class DagligSkaev extends Ordination {
     public DagligSkaev(LocalDate startDate, LocalDate slutDate, TypeOrdination type) {
         super(startDate, slutDate, type);
          doser = new ArrayList<>();
-        this.startDato = startDate; //ved ikke om jeg behøver at sætte datoer herrrrrrr :-)
+        this.startDato = startDate; //ved ikke om jeg behøver at sætte datoer her, eller om man får dem fra superklassen :-)
         this.slutDato = slutDate;
         this.typeOrdination = type;
     }
@@ -33,7 +33,7 @@ public class DagligSkaev extends Ordination {
 
     @Override
     public double samletDosis() {
-        long daysBetween = ChronoUnit.DAYS.between(startDato, slutDato);
+        long daysBetween = ChronoUnit.DAYS.between(startDato, slutDato); //er start og slut inkluderet i dette?
         return daysBetween * doegnDosis();
     }
 
