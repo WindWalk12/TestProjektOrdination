@@ -35,33 +35,41 @@ public class PN extends Ordination {
     }
 
     public double doegnDosis() {
-        LocalDate foersteDag = null;
-        LocalDate sidsteDag = null;
-        for (LocalDate ld : givetDosis) {
-            if (foersteDag == null) {
-                foersteDag = ld;
+        if (antalEnheder < 0 || antalGivet < 0) {
+            throw new RuntimeException("antalEnheder eller antalGivet må ikke være under 0");
+        } else {
+            LocalDate foersteDag = null;
+            LocalDate sidsteDag = null;
+            for (LocalDate ld : givetDosis) {
+                if (foersteDag == null) {
+                    foersteDag = ld;
+                }
+                if (ld.isBefore(foersteDag)) {
+                    foersteDag = ld;
+                }
             }
-            if (ld.isBefore(foersteDag)) {
-                foersteDag = ld;
+            for (LocalDate ld : givetDosis) {
+                if (sidsteDag == null) {
+                    sidsteDag = ld;
+                }
+                if (ld.isAfter(sidsteDag)) {
+                    sidsteDag = ld;
+                }
             }
+            if (foersteDag != null && sidsteDag != null) {
+                double dageImellem = ChronoUnit.DAYS.between(foersteDag, sidsteDag) + 1;
+                return (antalGivet*antalEnheder)/dageImellem;
+            }
+            return 0.0;
         }
-        for (LocalDate ld : givetDosis) {
-            if (sidsteDag == null) {
-                sidsteDag = ld;
-            }
-            if (ld.isAfter(sidsteDag)) {
-                sidsteDag = ld;
-            }
-        }
-        if (foersteDag != null && sidsteDag != null) {
-            double dageImellem = ChronoUnit.DAYS.between(foersteDag, sidsteDag) + 1;
-            return (antalGivet*antalEnheder)/dageImellem;
-        }
-        return 0.0;
     }
 
     public double samletDosis() {
-        return antalGivet*antalEnheder;
+        if (antalEnheder < 0 || antalGivet < 0) {
+            throw new RuntimeException("antalEnheder eller antalGivet må ikke være under 0");
+        } else {
+            return antalGivet*antalEnheder;
+        }
     }
 
     /**
