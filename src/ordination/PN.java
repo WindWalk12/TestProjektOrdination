@@ -92,8 +92,4 @@ public class PN extends Ordination {
     public void setAntalEnheder(double antalEnheder) {
         this.antalEnheder = antalEnheder;
     }
-
-    public void setAntalGivet(int antalGivet) {
-        this.antalGivet = antalGivet;
-    }
 }
