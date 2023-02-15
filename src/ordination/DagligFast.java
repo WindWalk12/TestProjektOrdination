@@ -34,7 +34,10 @@ public class DagligFast extends Ordination {
     public double samletDosis() {
         if ((dosisArray[0].getAntal() + dosisArray[1].getAntal() +
                 dosisArray[2].getAntal() + dosisArray[3].getAntal()) > 4) {
-            throw new RuntimeException("Samlet antal dosis må være 4 højest");
+            throw new RuntimeException("Samlet antal dosis må højest være 4");
+        }
+        if (super.getStartDen().isAfter(super.getSlutDen())) {
+            throw new IllegalArgumentException("Slut datoen er før start datoen");
         }
         double antalDosis = dosisArray[0].getAntal() + dosisArray[1].getAntal() +
                 dosisArray[2].getAntal() + dosisArray[3].getAntal();
@@ -46,7 +49,7 @@ public class DagligFast extends Ordination {
     public double doegnDosis() {
         if ((dosisArray[0].getAntal() + dosisArray[1].getAntal() +
                 dosisArray[2].getAntal() + dosisArray[3].getAntal()) > 4) {
-            throw new RuntimeException("Samlet antal dosis må være 4 højest");
+            throw new RuntimeException("Samlet antal dosis må højest være 4");
         }
         return dosisArray[0].getAntal() + dosisArray[1].getAntal() + dosisArray[2].getAntal() + dosisArray[3].getAntal();
     }
