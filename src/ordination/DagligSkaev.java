@@ -15,12 +15,12 @@ public class DagligSkaev extends Ordination {
     private TypeOrdination typeOrdination;
 
 
-    //ved oprettelse: vælg forskellige klokkeslæt og antal (vilkårligt antal)
+
 
     public DagligSkaev(LocalDate startDate, LocalDate slutDate, Patient patient, Laegemiddel laegemiddel) {
         super(startDate, slutDate, patient, laegemiddel);
          doser = new ArrayList<>();
-        this.startDato = startDate; //ved ikke om jeg behøver at sætte datoer her, eller om man får dem fra superklassen :-)
+        this.startDato = startDate;
         this.slutDato = slutDate;
     }
 
@@ -36,10 +36,6 @@ public class DagligSkaev extends Ordination {
         return daysBetween * doegnDosis();
     }
 
-
-    //for hver dosis
-    //tag antallet og læg det til double
-    //divider med size
     @Override
     public double doegnDosis() {
         double doegnDosisGennemsnit = 0;
