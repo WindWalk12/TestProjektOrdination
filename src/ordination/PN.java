@@ -31,7 +31,7 @@ public class PN extends Ordination {
             antalGivet++;
             return true;
         }
-        return false;   
+        return false;
     }
 
     public double doegnDosis() {
@@ -87,5 +87,13 @@ public class PN extends Ordination {
 
     public Laegemiddel getLaegemiddel() {
         return super.getLaegemiddel();
+    }
+
+    public void setAntalEnheder(double antalEnheder) {
+        this.antalEnheder = antalEnheder;
+    }
+
+    public void setAntalGivet(int antalGivet) {
+        this.antalGivet = antalGivet;
     }
 }
