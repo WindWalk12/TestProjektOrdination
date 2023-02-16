@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PNTest {
     PN pn;
     @BeforeEach
-    public void opsaetning() {
+    void opsaetning() {
         Patient p = new Patient("123456-7890", "Janne rhododendronpostkasse", 66.9);
         Laegemiddel lm = new Laegemiddel("Acetylsalicylsyre", 0.1, 0.15, 0.16, "Styk");
         LocalDate startdato = LocalDate.of(2023, 02, 16);
