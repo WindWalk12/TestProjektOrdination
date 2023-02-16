@@ -57,7 +57,7 @@ public class PN extends Ordination {
                 }
             }
             if (foersteDag != null && sidsteDag != null) {
-                double dageImellem = ChronoUnit.DAYS.between(foersteDag, sidsteDag) + 1;
+                double dageImellem = ChronoUnit.DAYS.between(foersteDag, sidsteDag);
                 return (antalGivet*antalEnheder)/dageImellem;
             }
             return 0.0;
