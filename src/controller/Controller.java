@@ -132,6 +132,16 @@ public class Controller {
 		public int antalOrdinationerPrVægtPrLægemiddel(double vægtStart,
 				double vægtSlut, Laegemiddel laegemiddel) {
 		int antal = 0;
+		if (laegemiddel == null) {
+			throw new IllegalArgumentException("Lægemiddel ikke valgt");
+		}
+		if (vægtStart < 0 || vægtSlut < 0) {
+			throw new IllegalArgumentException("Startvægt eller slutvægt er under 0");
+		}
+		if (vægtStart > vægtSlut) {
+			throw new IllegalArgumentException("Startvægt er større end slutvægt");
+		}
+
 		ArrayList<Patient> patienterMedVaegt = new ArrayList<>();
 		for (Patient p :storage.getAllPatienter()) {
 			if (p.getVaegt() >= vægtStart && p.getVaegt() <= vægtSlut) {
