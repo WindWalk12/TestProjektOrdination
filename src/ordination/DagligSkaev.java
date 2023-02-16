@@ -37,6 +37,9 @@ public class DagligSkaev extends Ordination {
     @Override
     public double doegnDosis() {
         double doegnDosisGennemsnit = 0;
+        if (doser.size() == 0) {
+            throw new ArithmeticException("Arraylist doser må ikke være størrelsen 0");
+        }
         for (Dosis dosis : doser) {
             doegnDosisGennemsnit += dosis.getAntal();
         }
