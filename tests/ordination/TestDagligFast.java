@@ -78,13 +78,75 @@ public class TestDagligFast {
         //Arrange
         Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.1,0.15,0.16,"Styk");
         Patient patient = new Patient("123456-7890", "Janne rhododendronpostkasse", 66.9);
-        DagligFast dagligFast = new DagligFast(LocalDate.of(2023,2,16), LocalDate.of(2023,2,18), patient, laegemiddel, 1,1,0,0);
+        DagligFast dagligFast = new DagligFast(LocalDate.of(2023,2,16), LocalDate.of(2023,2,18), patient, laegemiddel, 1,0,0,0);
 
         //Act
-        double faktiskDoegnDosis = dagligFast.doegnDosis();
+        double faktiskSamletDosis = dagligFast.samletDosis();
 
         //Assert
-        double forventetDoegnDosis = 2;
-        assertEquals(forventetDoegnDosis, faktiskDoegnDosis);
+        double forventetSamletDosis = 3;
+        assertEquals(forventetSamletDosis, faktiskSamletDosis);
+    }
+
+    @Test
+    void TC20_samletDosis_1_1_0_1___StartDato_Efter_SlutDato() {
+        //Arrange
+        Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.1,0.15,0.16,"Styk");
+        Patient patient = new Patient("123456-7890", "Janne rhododendronpostkasse", 66.9);
+        DagligFast dagligFast = new DagligFast(LocalDate.of(2023,2,16), LocalDate.of(2023,2,15), patient, laegemiddel, 1,1,0,1);
+
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class,() -> {
+            double forventetSamletDosis = dagligFast.samletDosis();
+        });
+
+        //Assert
+        assertEquals(exception.getMessage(),"Slut datoen er før start datoen");
+    }
+
+    @Test
+    void TC21_samletDosis_0_0_0_0() {
+        //Arrange
+        Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.1,0.15,0.16,"Styk");
+        Patient patient = new Patient("123456-7890", "Janne rhododendronpostkasse", 66.9);
+        DagligFast dagligFast = new DagligFast(LocalDate.of(2023,2,16), LocalDate.of(2023,2,18), patient, laegemiddel, 0,0,0,0);
+
+        //Act
+        double faktiskDosis = dagligFast.samletDosis();
+
+        //Assert
+        double forventetSamletDosis = 0;
+        assertEquals(forventetSamletDosis, faktiskDosis);
+    }
+
+    @Test
+    void TC22_samletDosis_4_0_0_0() {
+        //Arrange
+        Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.1,0.15,0.16,"Styk");
+        Patient patient = new Patient("123456-7890", "Janne rhododendronpostkasse", 66.9);
+        DagligFast dagligFast = new DagligFast(LocalDate.of(2023,2,16), LocalDate.of(2023,2,18), patient, laegemiddel, 4,0,0,0);
+
+        //Act
+        double faktiskDosis = dagligFast.samletDosis();
+
+        //Assert
+        double forventetSamletDosis = 12;
+        assertEquals(forventetSamletDosis, faktiskDosis);
+    }
+
+    @Test
+    void TC24_samletDosis_4_1_1_0() {
+        //Arrange
+        Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.1,0.15,0.16,"Styk");
+        Patient patient = new Patient("123456-7890", "Janne rhododendronpostkasse", 66.9);
+        DagligFast dagligFast = new DagligFast(LocalDate.of(2023,2,16), LocalDate.of(2023,2,18), patient, laegemiddel, 4,1,1,0);
+
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class,() -> {
+            double forventetSamletDosis = dagligFast.samletDosis();
+        });
+
+        //Assert
+        assertEquals(exception.getMessage(),"Samlet antal dosis må højest være 4 pr døgn");
     }
 }
