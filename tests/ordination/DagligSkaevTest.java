@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,13 +43,56 @@ class DagligSkaevTest {
     }
 
     @Test
-    void TC13_beregnsamletDosis() {
+    void TC13_beregnsamletDosis1() {
 
+        //ARRANGE
+        Patient patient = new Patient("1234567890", "Hans", 20);
+        Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.5,2,3,"Styk");
+        DagligSkaev dagligSkaev = new DagligSkaev(LocalDate.of(2023,2,16),LocalDate.of(2023, 2, 18),patient, laegemiddel);
+        dagligSkaev.opretDosis(LocalTime.of(10, 0),2);
+        dagligSkaev.opretDosis(LocalTime.of(15, 30), 4);
+        dagligSkaev.opretDosis(LocalTime.of(20, 00), 3);
+
+        //ACT
+        double faktiskSamletDosis = dagligSkaev.samletDosis();
+
+        //ASSERT
+        double forventetSamletDosis = 6;
+        assertEquals(forventetSamletDosis, faktiskSamletDosis);
     }
 
+    @Test
+    void TC13_beregnsamletDosis2() {
+
+        //ARRANGE
+        Patient patient = new Patient("1234567890", "Hans", 20);
+        Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.5,2,3,"Styk");
+        DagligSkaev dagligSkaev = new DagligSkaev(LocalDate.of(2023,2,16),LocalDate.of(2023, 2, 26),patient, laegemiddel);
+        dagligSkaev.opretDosis(LocalTime.of(10, 0),2);
+        dagligSkaev.opretDosis(LocalTime.of(15, 30), 4);
+        dagligSkaev.opretDosis(LocalTime.of(20, 00), 3);
+
+        //ACT
+        double faktiskSamletDosis = dagligSkaev.samletDosis();
+
+        //ASSERT
+        double forventetSamletDosis = 30;
+        assertEquals(forventetSamletDosis, faktiskSamletDosis);
+    }
 
     @Test
-    void opretDosis() {
+    void TC14opretDosis() {
+
+        //ARRANGE
+        Patient patient = new Patient("1234567890", "Hans", 20);
+        Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.5,2,3,"Styk");
+        DagligSkaev dagligSkaev = new DagligSkaev(LocalDate.of(2023,2,16),LocalDate.of(2023, 2, 26),patient, laegemiddel);
+        dagligSkaev.opretDosis(LocalTime.of(15, 30), 2);
+
+        ArgumentCaptor<Dosis> argument = ArgumentCaptor.forClass(Dosis.class);
+        verify(mock).doSomething(argument.capture());
+        assertEquals("John", argument.getValue().getName());
+
     }
 
 
