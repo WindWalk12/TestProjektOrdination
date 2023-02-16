@@ -20,7 +20,7 @@ public class Dosis {
         this.antal = antal;
     }
 
-    public LocalTime getTid(Dosis capture) {
+    public LocalTime getTid() {
         return tid;
     }
 

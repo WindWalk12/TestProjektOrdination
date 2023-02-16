@@ -89,10 +89,14 @@ class DagligSkaevTest {
 
         //ACT
         LocalTime faktiskDosisTid = dagligSkaev.getDoser().get(0).getTid();
+        double faktiskAntal = dagligSkaev.getDoser().get(0).getAntal();
 
 
         //ASSERT
-        //assertEquals(Lo, faktiskSamletDosis);
+        LocalTime forventetDosisTid = LocalTime.of(15, 30);
+        double forventetAntal = 2;
+        assertEquals(forventetDosisTid, faktiskDosisTid);
+        assertEquals(forventetAntal,faktiskAntal);
 
     }
 
