@@ -82,6 +82,7 @@ class DagligSkaevTest {
         assertEquals(forventetSamletDosis, faktiskSamletDosis);
     }
 
+    //VIRKER IKKE! MANGLER MOCK
     @Test
     void TC14opretDosis() {
 
