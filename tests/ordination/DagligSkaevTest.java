@@ -79,7 +79,7 @@ class DagligSkaevTest {
 
 
     @Test
-    void TC14opretDosis() {
+    void TC14opretDosisObjekt() {
 
         //ARRANGE
         Patient patient = new Patient("1234567890", "Hans", 20);
@@ -97,7 +97,6 @@ class DagligSkaevTest {
         double forventetAntal = 2;
         assertEquals(forventetDosisTid, faktiskDosisTid);
         assertEquals(forventetAntal,faktiskAntal);
-
     }
 
 
