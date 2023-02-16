@@ -30,7 +30,7 @@ class DagligSkaevTest {
     }
 
     @Test
-    void TC12_beregndoegnDosis() {
+    void TC12_beregndoegnDosisArithmeticException() {
         //Arrange
         Patient patient = new Patient("1234567890", "Hans", 20);
         Laegemiddel laegemiddel = new Laegemiddel("Acetylsalicylsyre", 0.5,2,3,"Styk");
@@ -42,12 +42,15 @@ class DagligSkaevTest {
     }
 
     @Test
+    void TC13_beregnsamletDosis() {
+
+    }
+
+
+    @Test
     void opretDosis() {
     }
 
-    @Test
-    void samletDosis() {
-    }
 
 
 }
