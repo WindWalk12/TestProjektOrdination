@@ -14,9 +14,6 @@ public class DagligSkaev extends Ordination {
     LocalDate slutDato;
     private TypeOrdination typeOrdination;
 
-
-
-
     public DagligSkaev(LocalDate startDate, LocalDate slutDate, Patient patient, Laegemiddel laegemiddel) {
         super(startDate, slutDate, patient, laegemiddel);
          doser = new ArrayList<>();
@@ -29,6 +26,7 @@ public class DagligSkaev extends Ordination {
       Dosis dosis = new Dosis(tid,antal);
       doser.add(dosis);
     }
+
 
     @Override
     public double samletDosis() {
