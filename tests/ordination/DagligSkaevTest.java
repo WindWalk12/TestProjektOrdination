@@ -35,8 +35,10 @@ class DagligSkaevTest {
         DagligSkaev dagligSkaev = new DagligSkaev(LocalDate.of(2023,2,16),LocalDate.of(2023, 2, 18),patient, laegemiddel);
 
         //Act & Assert
-        //ASSERT ARITHMETICEXCEPTION!
-        double faktiskDoegnDosis = dagligSkaev.doegnDosis();
+        Exception exception = assertThrows(ArithmeticException.class, () -> {
+            dagligSkaev.doegnDosis();
+        });
+        assertEquals(exception.getMessage(), "Arraylist doser må ikke være størrelsen 0");
     }
 
     @Test
